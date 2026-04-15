@@ -1,15 +1,14 @@
 {
-  "version": 2,
   "builds": [
     {
-      "src": "adnanportfilo/wsgi.py",
+      "src": "adnanportfilo/adnanportfilo/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "adnanportfilo/wsgi.py"
+      "dest": "adnanportfilo/adnanportfilo/wsgi.py"
     }
   ]
 }
