@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    #portfolio-section {
+        background: #0f2027;
+        background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        padding: 80px 0 !important;
+    }
+
+    .p-card {
+        background: #1a2a30 !important;
+        border: 1px solid rgba(68, 160, 141, 0.4) !important;
+        border-radius: 15px !important;
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .p-card:hover {
+        transform: translateY(-10px);
+        border-color: #44a08d !important;
+    }
+
+    .img-box {
+        height: 200px;
+        width: 100%;
+        background: #000;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .p-body {
+        padding: 20px !important;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        border-top: 4px solid #44a08d;
+    }
+
+    /* Buttons Fix */
+    .btn-container {
+        display: flex !important;
+        gap: 10px !important;
+        margin-top: 15px !important;
+    }
+
+    .custom-btn {
+        flex: 1;
+        padding: 8px 5px !important;
+        border-radius: 50px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        display: inline-block !important;
+    }
+
+    .btn-github {
+        border: 1px solid #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    .btn-github:hover {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .btn-live {
+        background: linear-gradient(135deg, #44a08d 0%, #093637 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+</style>
+
+<section id="portfolio-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 style="color: #44a08d; font-weight: 700; text-transform: uppercase;">My Technical Portfolio</h2>
+            <div style="width: 50px; height: 3px; background: #ffd700; margin: 10px auto;"></div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 d-flex">
+                <div class="p-card">
+                    <div class="img-box">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        {% else %}
+                            <i class="fa-solid fa-code fa-3x text-white opacity-25"></i>
+                        {% endif %}
+                    </div>
+
+                    <div class="p-body">
+                        <h5 style="color: #fff; font-weight: 600; margin-bottom: 10px;">{{ project.title }}</h5>
+                        <p style="color: #b0b0b0; font-size: 0.9rem; flex-grow: 1;">{{ project.description|truncatewords:15 }}</p>
+
+                        <div class="btn-container">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" class="custom-btn btn-github">
+                                <i class="fab fa-github me-1"></i> Code
+                            </a>
+                            {% endif %}
+
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank" class="custom-btn btn-live">
+                                <i class="fa-solid fa-rocket me-1"></i> Live
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-white">No projects found.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,101 @@
+<footer id="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>Python + Django Developer specializing in building scalable web applications and robust backend systems.</p>
+                <div class="social-links">
+                    <a href="https://github.com/adnanwitcher1-lgtm" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/adnan-nasir-8010aa3b6" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://x.com/adnannasir81701?s=21" target="_blank" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="mailto:nasiradnan20247@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#services">Web Development</a>
+                <a href="#services">API Development</a>
+                <a href="#services">Database Design</a>
+                <a href="#services">Cloud Deployment</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-envelope"></i> nasiradnan20247@gmail.com</p>
+                <p><i class="fa-solid fa-address-book"></i> +92 343 1740756</p>
+                <p><i class="fa-solid fa-map-marker-alt"></i> Faisalabad, Pakistan</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Adnan Nasir. All rights reserved. | Designed with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/923431740756?text=Hello%20Adnan!%20I'm%20interested%20in%20your%20development%20services." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+    // Django-Compatible Form Submission
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+
+        // Visual feedback
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Sending...</span>';
+
+        // Use FormData to capture all inputs including CSRF token
+        const formData = new FormData(form);
+
+        fetch('', { // Sends to the current URL where your home view is
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest' // Helps Django detect AJAX
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+
+            formMessage.style.display = 'block';
+            if (data.status === 'success') {
+                formMessage.className = 'form-message success';
+                formMessage.style.color = "#28a745"; 
+                formMessage.textContent = data.message;
+                form.reset();
+            } else {
+                formMessage.className = 'form-message error';
+                formMessage.style.color = "#dc3545";
+                formMessage.textContent = data.message || "Error occurred.";
+            }
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        })
+        .catch(error => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            formMessage.style.display = 'block';
+            formMessage.style.color = "#dc3545";
+            formMessage.textContent = "Could not connect to server.";
+        });
+    }
+
+    // ... (Keep your existing mobile menu and scroll animation scripts below) ...
+</script>

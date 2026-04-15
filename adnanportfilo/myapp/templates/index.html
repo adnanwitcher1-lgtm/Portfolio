@@ -1,0 +1,1752 @@
+
+           <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Python + Django Developer </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 32, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #44a08d;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #44a08d;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #44a08d;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Home Section */
+        #home {
+            padding: 150px 0 100px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-content h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .home-content h2 {
+            font-size: 2em;
+            color: #44a08d;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .home-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 2px solid #44a08d;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #44a08d;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(68, 160, 141, 0.5);
+        }
+
+        /* About Section */
+        #about {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .about-text h3 {
+            font-size: 2em;
+            color: #44a08d;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            margin-bottom: 18px;
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #d0d0d0;
+            text-align: justify;
+        }
+
+        .about-text strong {
+            color: #44a08d;
+            font-weight: 600;
+        }
+
+        .about-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-upload-container {
+            width: 280px;
+            height: 280px;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 3px dashed rgba(68, 160, 141, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .expertise-section h3 {
+            font-size: 2em;
+            color: #44a08d;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .expertise-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            border-radius: 2px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .expertise-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            border-color: #44a08d;
+            box-shadow: 0 15px 40px rgba(68, 160, 141, 0.3);
+        }
+
+        .expertise-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .expertise-card h4 {
+            color: #44a08d;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .expertise-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .expertise-card li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #d0d0d0;
+            font-size: 0.95em;
+        }
+
+        .expertise-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #44a08d;
+            font-weight: bold;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 0;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            border-color: #44a08d;
+            box-shadow: 0 10px 30px rgba(68, 160, 141, 0.3);
+        }
+
+        .stat-box h4 {
+            font-size: 2.5em;
+            color: #44a08d;
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            font-size: 0.95em;
+            color: #b0b0b0;
+        }
+
+        .about-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-upload-container:hover {
+            border-color: #44a08d;
+            box-shadow: 0 15px 50px rgba(68, 160, 141, 0.4);
+            transform: scale(1.05);
+        }
+
+        .image-upload-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-upload-container.has-image {
+            border-style: solid;
+            border-width: 4px;
+        }
+
+        .image-upload-container.has-image .upload-placeholder {
+            display: none;
+        }
+
+        .upload-placeholder {
+            text-align: center;
+            color: #44a08d;
+            padding: 20px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .upload-placeholder svg {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .upload-placeholder p {
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .expertise-section {
+            margin-bottom: 60px;
+        }
+
+        /* Services Section */
+        #services {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            text-align: center;
+            color: #44a08d;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(68, 160, 141, 0.3);
+            border-color: #44a08d;
+        }
+
+        .service-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: #44a08d;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .service-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Section */
+        #portfolio {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(68, 160, 141, 0.3);
+            border-color: #44a08d;
+        }
+
+        .project-card h3 {
+            color: #44a08d;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .project-card p {
+            margin-bottom: 20px;
+            color: #b0b0b0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(68, 160, 141, 0.2);
+            color: #44a08d;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(68, 160, 141, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 60px 0 30px;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #44a08d;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a:hover {
+            color: #44a08d;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #44a08d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #44a08d;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #44a08d;
+            color: #0f2027;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(68, 160, 141, 0.2);
+            color: #b0b0b0;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-whatsapp 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+        }
+
+        @keyframes pulse-whatsapp {
+
+            0%,
+            100% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 5px 30px rgba(37, 211, 102, 0.8);
+            }
+        }
+
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f2027;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #44a08d;
+        }
+
+        /* Section transition animations */
+        section {
+            opacity: 0;
+            animation: sectionFadeIn 0.8s ease forwards;
+        }
+
+        @keyframes sectionFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Nav link active animation */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #44a08d;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 15px rgba(68, 160, 141, 0.3);
+        }
+
+        .nav-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(68, 160, 141, 0.5);
+        }
+
+        .nav-download-btn .download-icon {
+            font-size: 1.1em;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 100px 0;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 2em;
+            color: #44a08d;
+            margin-bottom: 20px;
+        }
+
+        .contact-info>p {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: #44a08d;
+            box-shadow: 0 5px 20px rgba(68, 160, 141, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2em;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(68, 160, 141, 0.1);
+            border-radius: 50%;
+        }
+
+        .contact-item h4 {
+            color: #44a08d;
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: #e0e0e0;
+        }
+
+        .contact-form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(68, 160, 141, 0.2);
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(68, 160, 141, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #44a08d;
+            box-shadow: 0 0 15px rgba(68, 160, 141, 0.3);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #b0b0b0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: rgba(15, 32, 39, 0.8);
+            padding: 0 5px;
+        }
+
+        .form-group input:focus+label,
+        .form-group textarea:focus+label,
+        .form-group input:not(:placeholder-shown)+label,
+        .form-group textarea:not(:placeholder-shown)+label {
+            top: -10px;
+            font-size: 0.85em;
+            color: #44a08d;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #44a08d 0%, #093637 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(68, 160, 141, 0.5);
+        }
+
+        .btn-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover .btn-icon {
+            transform: translateX(5px);
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .form-message.success {
+            background: rgba(68, 160, 141, 0.2);
+            border: 1px solid #44a08d;
+            color: #44a08d;
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid #ff4444;
+            color: #ff6b6b;
+            display: block;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Apply animations */
+        .service-card {
+            animation: fadeIn 0.6s ease forwards;
+            animation-delay: calc(var(--index) * 0.1s);
+        }
+
+        .project-card {
+            animation: fadeIn 0.6s ease forwards;
+            animation-delay: calc(var(--index) * 0.1s);
+        }
+
+        .stat-box {
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: calc(var(--index) * 0.2s);
+        }
+
+        .contact-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-right {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 32, 39, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                align-items: stretch;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-right.active {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .nav-download-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .home-content h1 {
+                font-size: 2.5em;
+            }
+
+            .home-content h2 {
+                font-size: 1.5em;
+            }
+
+            .home-buttons {
+                flex-direction: column;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .about-text {
+                order: 2;
+            }
+
+            .about-image {
+                order: 1;
+                margin-bottom: 20px;
+            }
+
+            .image-upload-container {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .stat-box {
+                padding: 25px 15px;
+            }
+
+            .stat-box h4 {
+                font-size: 2em;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2em;
+            }
+
+            .home-content h1 {
+                font-size: 2em;
+            }
+
+            .home-content h2 {
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-box h4 {
+                font-size: 1.8em;
+            }
+
+            .image-upload-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">DevPortfolio</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-right" id="navRight">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="{% url 'projects' %}">Projects</a></li>
+
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+               {% load static %} <a href="{% static 'AdnanNasirResume.pdf' %}" 
+   class="nav-download-btn" 
+   download="AdnanNasirCV.pdf">  <span>Download CV</span>
+    <span class="download-icon"></span>
+</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container">
+            <div class="home-content">
+                <h1>HEY I'M ADNAN NASIR</h1>
+                <h2>Python + Django Developer</h2>
+                <p>Building robust and scalable web applications with cutting-edge technologies. Specializing in backend
+                    development, API design, and database optimization.</p>
+                <div class="home-buttons">
+                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- About Section -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+
+    <div class="about-container">
+      
+      <!-- About Text -->
+      <div class="about-text">
+        <h3>Summary</h3>
+        <p>
+          Hello! I'm a passionate <strong>Frontend and Backend Python + Django Developer</strong> 
+          with 1+ years of experience in building scalable full-stack web applications. 
+          I specialize in creating robust backend systems with Django while crafting beautiful, 
+          responsive user interfaces.
+        </p>
+
+        <p>
+          My expertise spans across the entire web development stack — from designing RESTful APIs 
+          and optimizing database performance on the backend, to building interactive user interfaces 
+          with modern frontend technologies.
+        </p>
+      </div>
+
+      <!-- Profile Image (Django Loop) -->
+      {% for pic in pics %}
+      <div style="width:220px;
+                  height:220px;
+                  border-radius:50%;
+                  border:5px solid #ffd700;
+                  box-shadow:0 8px 20px rgba(255,215,0,0.5);
+                  overflow:hidden;
+                  margin:40px auto;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  background-color:#fff8dc;
+                  transition:transform 0.3s ease, box-shadow 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.08)'; this.style.boxShadow='0 10px 30px rgba(255,215,0,0.8)'"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(255,215,0,0.5)'">
+
+        {% if pic.image %}
+          <img src="{{ pic.image.url }}" alt="Profile Picture"
+               style="width:100%;
+                      height:100%;
+                      object-fit:cover;
+                      border-radius:50%;">
+        {% else %}
+          <span style="color:#aaa; font-size:14px;">No Image</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+      
+    </div> <!-- about-container end -->
+  </div> <!-- container end -->
+</section>
+
+           
+
+            <div class="expertise-section">
+                <h3>Core Expertise</h3>
+                <div class="expertise-grid">
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="fa-solid fa-code"></i></div>
+                        <h4>Backend Development</h4>
+                        <ul>
+                            <li>Python & Django Framework</li>
+                            <li>Django REST Framework</li>
+                            <li>API Design & Integration</li>
+                            <li>Authentication & Security</li>
+                        </ul>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="fa-solid fa-palette"></i></div>
+                        <h4>Frontend Development</h4>
+                        <ul>
+                            <li>HTML5, CSS3, JavaScript</li>
+                            <li>React.js & Modern Frameworks</li>
+                            <li>Responsive UI/UX Design</li>
+                            <li>Bootstrap & Tailwind CSS</li>
+                        </ul>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="fa-solid fa-database"></i></div>
+                        <h4>Database Management</h4>
+                        <ul>
+                            <li>PostgreSQL & MySQL</li>
+                            <li>MongoDB (NoSQL)</li>
+                            <li>Database Optimization</li>
+                            <li>Redis Caching</li>
+                        </ul>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="fa-solid fa-cloud"></i></div>
+                        <h4>DevOps & Deployment</h4>
+                        <ul>
+                            <li>Docker & Containerization</li>
+                            <li>AWS & Cloud Services</li>
+                            <li>CI/CD Pipelines</li>
+                            <li>Linux Server Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-stats">
+                <div class="stat-box">
+                    <h4>50+</h4>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-box">
+                    <h4>5+</h4>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-box">
+                    <h4>30+</h4>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-box">
+                    <h4>100%</h4>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Building dynamic, responsive web applications using Django framework with modern frontend
+                        technologies.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-exchange-alt"></i></div>
+                    <h3>API Development</h3>
+                    <p>Creating robust RESTful APIs with Django REST Framework, complete with authentication and
+                        documentation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-project-diagram"></i></div>
+                    <h3>Database Design</h3>
+                    <p>Designing and optimizing database schemas for PostgreSQL, MySQL, and MongoDB with best practices.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <h3>Cloud Deployment</h3>
+                    <p>Deploying applications on AWS, Heroku, and DigitalOcean with Docker containerization.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-lock"></i></div>
+                    <h3>Security Implementation</h3>
+                    <p>Implementing authentication, authorization, and security best practices to protect your
+                        applications.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-tachometer-alt"></i></div>
+                    <h3>Performance Optimization</h3>
+                    <p>Optimizing application performance through caching, query optimization, and code refactoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">My Portfolio</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured e-commerce application with payment integration, product management, order
+                        tracking, and customer reviews system.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Stripe API</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>RESTful API Service</h3>
+                    <p>Scalable API service with JWT authentication, rate limiting, and comprehensive Swagger
+                        documentation for mobile applications.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django REST</span>
+                        <span class="tech-tag">JWT Auth</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Swagger</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Task Management System</h3>
+                    <p>Real-time collaborative task management application with team features, push notifications, and
+                        analytics dashboard.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">Celery</span>
+                        <span class="tech-tag">React</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Blog Management System</h3>
+                    <p>Content management system with rich text editor, category management, SEO optimization, and
+                        social media integration.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">CKEditor</span>
+                        <span class="tech-tag">AWS S3</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Business intelligence dashboard with real-time data visualization, custom reports, and export
+                        functionality.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Chart.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Celery</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Learning Management System</h3>
+                    <p>Online education platform with course management, video streaming, quizzes, and student progress
+                        tracking.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">FFmpeg</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Let's Work Together</h3>
+                <p>Have a project in mind? I'd love to hear about it. Fill out the form and I'll get back to you as soon as possible.</p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>mumtazahmadfaheem@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-address-book"></i></div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+92 343 1740756</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Faisalabad, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" required placeholder=" ">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span>Send Message</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </form>
+                <div id="formMessage" class="form-message" style="margin-top: 20px; font-weight: bold;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    const messageDiv = document.getElementById('formMessage');
+    const btn = document.getElementById('submitBtn');
+
+    // Visual feedback: Disable button while sending
+    btn.disabled = true;
+    btn.innerText = "Sending...";
+
+    fetch('', {  // This sends the data to your current URL (home view)
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest', // Tells Django this is an AJAX request
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Send Message</span><span class="btn-icon">→</span>';
+        
+        if (data.status === 'success') {
+            messageDiv.innerText = data.message;
+            messageDiv.style.color = "#28a745"; // Success Green
+            form.reset(); // Clear the form
+        } else {
+            messageDiv.innerText = data.message || "Something went wrong.";
+            messageDiv.style.color = "#dc3545"; // Error Red
+        }
+    })
+    .catch(error => {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Send Message</span><span class="btn-icon">→</span>';
+        messageDiv.innerText = "Error connecting to server.";
+        messageDiv.style.color = "#dc3545";
+    });
+}
+</script>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>Python + Django Developer specializing in building scalable web applications and robust backend
+                        systems.</p>
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank">G</a>
+                        <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://twitter.com" target="_blank">T</a>
+                        <a href="mumtazahmadfaheem@gmail.com">@</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#services">Web Development</a>
+                    <a href="#services">API Development</a>
+                    <a href="#services">Database Design</a>
+                    <a href="#services">Cloud Deployment</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fa-solid fa-envelope"></i>nasiradnan20247@gmail.com</p>
+                    <p><i class="fa-solid fa-address-book"></i> +92 343 1740756</p>
+                    <p><i class="fa-solid fa-map-marker-alt"></i> Faisalabad, Pakistan</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 adnan Developer. All rights reserved. | Designed with <i class="fa-solid fa-heart"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/923431740756?text=Hello!%20I'm%20interested%20in%20your%20services" class="whatsapp-float"
+        target="_blank" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navRight = document.getElementById('navRight');
+            navRight.classList.toggle('active');
+        }
+
+        // Image upload functionality
+        const imageInput = document.getElementById('imageInput');
+        const imageContainer = document.getElementById('imageContainer');
+        const previewImage = document.getElementById('previewImage');
+        const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+
+        imageInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    imageContainer.classList.add('has-image');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Download CV function
+        function downloadCV(e) {
+            e.preventDefault();
+            // Create a dummy CV download
+            alert('CV download will start shortly!\n\nNote: Replace this with your actual CV file link in the code.');
+            // In production, replace the alert with actual download link:
+            // window.location.href = 'path/to/your/cv.pdf';
+        }
+
+        // Smooth scrolling with animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Add animation class before scrolling
+                    target.style.transform = 'scale(0.95)';
+                    target.style.transition = 'transform 0.3s ease';
+
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // Reset animation
+                    setTimeout(() => {
+                        target.style.transform = 'scale(1)';
+                    }, 300);
+
+                    // Close mobile menu after clicking
+                    const navRight = document.getElementById('navRight');
+                    navRight.classList.remove('active');
+                }
+            });
+        });
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '#e0e0e0';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = '#44a08d';
+                }
+            });
+        });
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const formMessage = document.getElementById('formMessage');
+            const form = document.getElementById('contactForm');
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Simulate form submission
+            formMessage.className = 'form-message success';
+            formMessage.textContent = `Thank you, ${name}! Your message has been sent successfully. I'll get back to you soon.`;
+
+            // Reset form
+            form.reset();
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Add animation to cards with delay
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach((card, index) => {
+                card.style.setProperty('--index', index);
+                card.classList.add('animate-on-scroll');
+                observer.observe(card);
+            });
+
+            // Animate project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.setProperty('--index', index);
+                card.classList.add('animate-on-scroll');
+                observer.observe(card);
+            });
+
+            // Animate stat boxes
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach((box, index) => {
+                box.style.setProperty('--index', index);
+            });
+
+            // Animate contact items
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach((item, index) => {
+                item.classList.add('animate-on-scroll');
+                item.style.animationDelay = `${index * 0.2}s`;
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+
+</html>
