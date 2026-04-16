@@ -1,20 +1,25 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "adnanportfilo/adnanportfilo/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "adnanportfilo/adnanportfilo/wsgi.py"
-    }
-  ]
+    "builds": [
+        {
+            "src": "adnanportfolio/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb"
+            }
+        },
+        {
+            "src": "static/**",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "adnanportfolio/wsgi.py"
+        }
+    ]
 }

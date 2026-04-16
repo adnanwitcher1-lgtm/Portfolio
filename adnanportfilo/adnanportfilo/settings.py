@@ -12,8 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@^$dpp#6!$4fbg011=v5h3^=qaym-(3em(g_8d$h^6@=n$dd('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Set to False when you are officially live
-DEBUG = True
+DEBUG = False  # ✅ CHANGED: True se False
 
 # Updated for Vercel deployment
 ALLOWED_HOSTS = ['.vercel.app', 'now.sh', 'localhost', '127.0.0.1']
@@ -31,7 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Essential for Vercel static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -49,6 +48,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -60,8 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'adnanportfilo.wsgi.application'
 
-# Database
-# Note: SQLite data will reset on Vercel after every deployment/sleep.
+# Database (SQLite - Note: Will reset on Vercel)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -84,7 +83,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript)
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'  # ✅ CHANGED: 'static/' se '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -98,7 +97,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email Configuration
+# Email Configuration (Keep as is)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
