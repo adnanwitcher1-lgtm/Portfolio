@@ -1,7 +1,7 @@
-{
+echo {
     "builds": [
         {
-            "src": "adnanportfolio/wsgi.py",
+            "src": "adnanportfilo/wsgi.py",
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb"
@@ -19,7 +19,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "adnanportfolio/wsgi.py"
+            "dest": "adnanportfilo/wsgi.py"
         }
     ]
-}
+} > vercel.json
