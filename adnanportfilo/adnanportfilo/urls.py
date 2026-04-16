@@ -6,9 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('myapp.urls')),
+    path('', include('myapp.urls')),  # myapp ke URLs
 ]
 
+# Development mein static aur media files serve karne ke liye
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(settings.BASE_DIR, 'static'))
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
