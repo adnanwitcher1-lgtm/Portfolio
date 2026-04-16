@@ -1,5 +1,12 @@
-echo {
+{
     "builds": [
+        {
+            "src": "adnanportfilo/manage.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb"
+            }
+        },
         {
             "src": "adnanportfilo/wsgi.py",
             "use": "@vercel/python",
@@ -22,4 +29,4 @@ echo {
             "dest": "adnanportfilo/wsgi.py"
         }
     ]
-} > vercel.json
+}
